@@ -16,7 +16,7 @@ router.get('/:to',async (req,res) => {
   let amount = web3.utils.toWei(config.amount)
   let balance = await web3js.eth.getBalance(toAddress);
   if(balance >= amount){
-    res.send("You already have enough ETH");
+    res.send("<span style='color: red; animation: shake 0.5s;'>You already have enough QOM</span>");
     return;
   }
 
@@ -29,12 +29,12 @@ router.get('/:to',async (req,res) => {
     to:toAddress,
     value:web3js.utils.toHex(amount),
     data:"0x0",
-    //chainId: web3js.utils.toHex('2101993'),
+    chainId: web3js.utils.toHex('7668378'),
     nonce:web3js.utils.toHex(count)
   };
 
   web3js.eth.sendTransaction(rawTransaction);
-  res.send(amount / Math.pow(10, 18) + " ETH transferred to " + toAddress)
+  res.send("<span style='animation: pulse 0.5s;'>" + amount / Math.pow(10, 18) + " QOM transferred to " + toAddress + "</span>");
 });
 
 module.exports = router;
